@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<script type="text/javascript">
+    function getxml(){
+        if (window.XMLHttpRequest){
+            var xmlhttp=new new XMLHttpRequest();
+            console.log('浏览器支持xmlhttpRequest');
+        }else{
+            var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            console.log('浏览器支持ActiveXObject("")');
+        }
+        return xmlhttp;
+    }
+    function init() {
+        var xhr = getxml();
+        xhr.open("get","/allUsers",true)
+        xhr.onload=function () {
+            if (xhr.readyState==4&&xhr.status==200){
+                let res = xhr.responseText;
+                
+            }
+        }
+    }
+    function add() {
+        window.location.href="add.html?backurl="+window.location.href;
+    }
+    function del(userId) {
+        alert("删除用户")
+    }
+    function upload() {
+        window.location.href="upload.html?backurl="+window.location.href;
+    }
+</script>
+<body>
+<h2>Hello World!</h2>
+<table border="1" th:width="300">
+    <tr>
+        <th>userid</th>
+        <th>username</th>
+        <th>password</th>
+        <th>编辑</th>
+    </tr>
+
+    <tr th:each="user:${userList}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getPassword()}"></td>
+        <th>
+            <button type="button" name="add" onclick="add()">新增</button>
+            <button type="button" name="del" value="${userId}" onclick="del()">删除</button>
+        </th>
+    </tr>
+</table>
+<button type="button" onclick="upload()" value="上传">上传</button>
+</body>
+</html>

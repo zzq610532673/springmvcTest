@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace指定该映射文件要实现的接口 -->
+<mapper namespace="com.zzq.mapper.UserMapper">
+    <cache eviction="LRU" type="com.zzq.redis.RedisCache"/>
+    <select id="findAll" resultType="com.zzq.bean.User">
+        SELECT * FROM user
+    </select>
+    <select id="getUser" resultType="com.zzq.bean.User">
+        SELECT * FROM USER 
+        <where>
+            <if test="username!=null and username!=''">
+                and username='${username}'
+            </if>
+        </where>
+    </select>
+    <insert id="save" parameterType="com.zzq.bean.User">
+        insert into user(username,password) values ('${username}','${password}')
+    </insert>
+    <update id="update">
+        update user set username='${user.username}',password='${user.password}' 
+        where id='${id}'
+    </update>
+</mapper>

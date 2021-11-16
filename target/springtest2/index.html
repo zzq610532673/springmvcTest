@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type"content="text/html;charset=utf-8">
+<script type="text/javascript">
+    window.onload=function () {
+        document.getElementById("yzm").setAttribute("src","http://localhost:8080/springtest2_war_exploded/getVerify?"+Math.random());
+            //src="http://localhost:8080/springtest2_war_exploded/getVerify?\"+Math.random()"
+        //setAttribute("src","http://localhost:8080/springtest2_war_exploded/getVerify?"+Math.random());
+        //$("#yzm").attr("src","http://localhost:8080/springtest2_war_exploded/getVerify?"+Math.random())
+    }
+    function register(){
+        window.location.href="http://localhost:8080/springtest2_war_exploded/register.html";
+    }
+    function changeCode() {
+        //$("#yzm").attr("src","${base}/captcha?captchaId=${captchaId}&tamp=" + (new date()).valueOf());
+        document.getElementById("yzm").setAttribute("src","http://localhost:8080/springtest2_war_exploded/getVerify?"+Math.random());
+    }
+</script>
+<body>
+    <h2>Hello World!</h2>
+    <form action="http://localhost:8080/springtest2_war_exploded/login" method="post">
+        <input type="text" name="username" placeholder="请输入用户名"/>
+        <br>
+        <input type="password" name="password" placeholder="请输入用户名"/>
+        <br>
+        <input type="text" name="captcha" id="captcha" placeholder="请输入验证码"/>
+        <input type="hidden" name="captchaId" id="captchaId" value="${captchaId}">
+        <img id="yzm" src="" onclick="changeCode()" alt="换一张" style="cursor: pointer"/>
+        <br>
+        <button value="登录" type="submit">登录</button>
+        <input type="button" onclick="register()" value="注册"></input>
+    </form>
+</body>
+</html>
