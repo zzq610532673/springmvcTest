@@ -15,7 +15,7 @@
         <property name="from" value="${mail.from}"/>
     </bean>
     
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <bean id="JavaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="defaultEncoding" value="${mail.defaultEncoding}"/>
         <property name="host"  value="${mail.host}"/>
         <property name="username" value="${mail.username}"/>
